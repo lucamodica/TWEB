@@ -1,3 +1,6 @@
 #IntelliJ file
 */.idea
 */*.iml
+
+*/*/.idea
+*/*/*.iml
