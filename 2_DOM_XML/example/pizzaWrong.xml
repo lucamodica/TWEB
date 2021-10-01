@@ -1,0 +1,14 @@
+<?xml version='1.0'?>
+
+<!DOCTYPE pizza [
+	<!ELEMENT pizza (topping, price, size)>
+	<!ELEMENT topping (#PCDATA)>
+	<!ELEMENT price (#PCDATA)>
+	<!ELEMENT size (#PCDATA)>
+	<!ATTLIST topping extracheese (yes|no) 'no'>
+]>
+   <pizza>
+     <topping extracheese='yes'>Peperoni</topping>
+     <pp> 7.00 </prezzo>
+     <size> large </size>
+   </pizza>
