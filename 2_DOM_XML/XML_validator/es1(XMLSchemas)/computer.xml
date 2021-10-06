@@ -1,0 +1,8 @@
+<computer typology="desktop">
+  <modello>string</modello>
+  <RAM>201</RAM>
+  <peripherals>
+    <!--Zero or more repetitions:-->
+    <peripheralName>string</peripheralName>
+  </peripherals>
+</computer>

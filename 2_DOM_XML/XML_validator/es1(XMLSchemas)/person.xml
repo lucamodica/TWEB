@@ -1,0 +1,11 @@
+<person>
+  <surname>string</surname>
+  <name>string</name>
+  <!--Optional:-->
+  <nickname>string</nickname>
+  <gender>F</gender>
+  <addresses>
+    <!--Zero or more repetitions:-->
+    <address/>
+  </addresses>
+</person>

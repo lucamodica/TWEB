@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="person" type="personType"/>
+
+    <xs:complexType name="personType">
+        <xs:sequence>
+            <xs:element name="surname" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="nickname" type="xs:string" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="gender" type="genderType"/>
+            <xs:element name="addresses" type="addressesType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="genderType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="M"/>
+            <xs:enumeration value="F"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="addressesType">
+        <xs:sequence>
+            <xs:element name="address" type="addressesType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="addressType">
+        <xs:sequence>
+            <xs:element name="city" type="xs:string"/>
+            <xs:element name="street" type="xs:string"/>
+            <xs:element name="number" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

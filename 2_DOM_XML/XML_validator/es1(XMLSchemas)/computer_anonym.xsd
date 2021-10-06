@@ -1,0 +1,29 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="computer">
+
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="modello" type="xs:string"/>
+                <xs:element name="RAM" type="xs:positiveInteger"/>
+                <xs:element name="peripherals">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="peripheralName" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+
+            <xs:attribute name="typology">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="desktop"/>
+                        <xs:enumeration value="portatile"/>
+                        <xs:enumeration value="tablet"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+
+    </xs:element>
+</xs:schema>
