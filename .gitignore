@@ -1,6 +1,10 @@
 #IntelliJ file
+*.iml
+/.idea
 */.idea
 */*.iml
 
+
+#IntelliJ file for each project
 */*/.idea
 */*/*.iml
