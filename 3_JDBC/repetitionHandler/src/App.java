@@ -110,8 +110,12 @@ public class App {
                     for (Map.Entry<String, HashSet<Teacher>> set :
                             grid.entrySet()) {
 
-                        System.out.println("Teacher for " + set.getKey() + ": "
-                                + set.getValue());
+                        System.out.print("Teacher for " + set.getKey() + ": ");
+                        for (Teacher teacher: set.getValue()) {
+                            System.out.print("| " + teacher.getName() + " " +
+                                    teacher.getSurname() + " | ");
+                        }
+                        System.out.println();
                     }
                     break;
 
