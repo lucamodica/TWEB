@@ -8,3 +8,5 @@
 #IntelliJ file for each project
 */*/.idea
 */*/*.iml
+*/*/out
+*/*/venv
