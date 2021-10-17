@@ -28,7 +28,7 @@ public class Affilation {
 
     @Override
     public String toString() {
-        return "Affilation{" +
+        return "{" +
                 "teacher_id=" + teacher_id +
                 ", course_title='" + course_title + '\'' +
                 '}';

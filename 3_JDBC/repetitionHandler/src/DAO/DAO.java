@@ -105,7 +105,64 @@ public class DAO {
         return out;
     }
 
-    public static Course insertCourse(){
+    public static ArrayList<User> retrieveUsers() {
+        Connection conn1 = null;
+        ArrayList<User> out = new ArrayList<>();
+        try {
+            conn1 = DriverManager.getConnection(url1, user, password);
+
+            Statement st = conn1.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM utente");
+            while (rs.next()) {
+                User u = new User(rs.getInt("matricola"), rs.getString("account"),
+                        rs.getString("password"), rs.getString("ruolo"));
+                out.add(u);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            if (conn1 != null) {
+                try {
+                    conn1.close();
+                } catch (SQLException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            }
+        }
+        return out;
+    }
+
+    public static ArrayList<Lesson> retrieveLessons() {
+        Connection conn1 = null;
+        ArrayList<Lesson> out = new ArrayList<>();
+        try {
+            conn1 = DriverManager.getConnection(url1, user, password);
+
+            Statement st = conn1.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM ripetizione");
+            while (rs.next()) {
+                String[] hm = rs.getString("ora_inizio").split(":");
+                Lesson l = new Lesson(rs.getInt("docente"), rs.getInt("utente"),
+                        Integer.parseInt(hm[0]), Integer.parseInt(hm[1]), rs.getString("corso"));
+                out.add(l);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            if (conn1 != null) {
+                try {
+                    conn1.close();
+                } catch (SQLException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            }
+        }
+        return out;
+    }
+
+    public static void insertCourse(){
         Connection conn1 = null;
         String title, desc;
         Scanner in = new Scanner(System.in);
@@ -125,7 +182,7 @@ public class DAO {
             Statement st = conn1.createStatement();
             st.execute("insert into corso (titolo, descrizione) values ('" + title +
                     "', '" + desc + "')");
-
+            System.out.println("New course (" + title + ") added!");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -140,10 +197,9 @@ public class DAO {
             }
         }
 
-        return c;
     }
 
-    public static String deleteCourse(){
+    public static void deleteCourse(){
         Connection conn1 = null;
         String title = null;
         Scanner in = new Scanner(System.in);
@@ -158,6 +214,7 @@ public class DAO {
             //Execute insert query
             Statement st = conn1.createStatement();
             st.execute("delete from corso where titolo =  '" + title + "'");
+            System.out.println("Course " + title + " deleted.");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -172,15 +229,13 @@ public class DAO {
             }
         }
 
-        return title;
     }
 
-    public static Teacher insertTeacher(){
+    public static void insertTeacher(){
         Connection conn1 = null;
         int ID_number;
         String name, surname;
         Scanner in = new Scanner(System.in);
-        Teacher t = null;
 
         try {
             conn1 = DriverManager.getConnection(url1, user, password);
@@ -193,13 +248,12 @@ public class DAO {
             name = in.nextLine();
             System.out.println("Insert a surname: ");
             surname = in.nextLine();
-            t = new Teacher(ID_number, name, surname);
 
             //Execute insert query
             Statement st = conn1.createStatement();
             st.execute("insert into docente (matricola, nome, cognome) values ('" + ID_number +
                     "', '" + name + "', '" + surname + "')");
-
+            System.out.println("Teacher " + name + " " + surname + " added!");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -214,10 +268,9 @@ public class DAO {
             }
         }
 
-        return t;
     }
 
-    public static int deleteTeacher(){
+    public static void deleteTeacher(){
         Connection conn1 = null;
         int id = 0;
         Scanner in = new Scanner(System.in);
@@ -232,6 +285,7 @@ public class DAO {
             //Execute insert query
             Statement st = conn1.createStatement();
             st.execute("delete from docente where matricola =  '" + id + "'");
+            System.out.println("Teacher " + id + " deleted.");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -246,15 +300,13 @@ public class DAO {
             }
         }
 
-        return id;
     }
 
-    public static Affilation insertAffilation(){
+    public static void insertAffilation(){
         Connection conn1 = null;
         int ID_number;
         String title;
         Scanner in = new Scanner(System.in);
-        Affilation a = null;
 
         try {
             conn1 = DriverManager.getConnection(url1, user, password);
@@ -265,12 +317,13 @@ public class DAO {
             in.nextLine(); //For workaroud to prevent input skipping
             System.out.println("Insert a course title: ");
             title = in.nextLine();
-            a = new Affilation(ID_number, title);
 
             //Execute insert query
             Statement st = conn1.createStatement();
             st.execute("insert into affiliazione (matricola_docente, titolo_corso) values ('" + ID_number +
                     "', '" + title + "')");
+            System.out.println("Affiliation of the teacher " + ID_number +
+                    " to the course " + title + " added!");
 
 
         } catch (SQLException e) {
@@ -286,15 +339,13 @@ public class DAO {
             }
         }
 
-        return a;
     }
 
-    public static Affilation deleteAffilation(){
+    public static void deleteAffilation(){
         Connection conn1 = null;
         int ID_number;
         String title;
         Scanner in = new Scanner(System.in);
-        Affilation a = null;
 
         try {
             conn1 = DriverManager.getConnection(url1, user, password);
@@ -305,12 +356,13 @@ public class DAO {
             in.nextLine(); //For workaroud to prevent input skipping
             System.out.println("Insert a course title: ");
             title = in.nextLine();
-            a = new Affilation(ID_number, title);
 
             //Execute insert query
             Statement st = conn1.createStatement();
             st.execute("delete from affiliazione where matricola_docente =  '" + ID_number +
                     "' and titolo_corso = '" + title + "'");
+            System.out.println("Affiliation of the teacher " + ID_number +
+                    " to the course " + title + " deleted.");
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -325,7 +377,6 @@ public class DAO {
             }
         }
 
-        return a;
     }
 
     public static HashMap<String, HashSet<Teacher>> retrievePossibleRepetitions(){
@@ -367,5 +418,101 @@ public class DAO {
         }
 
         return grid;
+    }
+
+    public static void insertLesson(){
+        Connection conn1 = null;
+        int teacher, userr;
+        String course;
+        int h, m;
+        Scanner in = new Scanner(System.in);
+
+        try {
+            conn1 = DriverManager.getConnection(url1, user, password);
+
+            //Data input
+            System.out.println("Insert the ID number of the teacher: ");
+            teacher = in.nextInt();
+            in.nextLine(); //For workaroud to prevent input skipping
+            System.out.println("Insert the ID number of the user: ");
+            userr = in.nextInt();
+            in.nextLine(); //For workaroud to prevent input skipping
+            System.out.println("Insert the course title: ");
+            course = in.nextLine();
+            System.out.println("Insert the hour of the lesson (its duration will be 1 hour): ");
+            h = in.nextInt();
+            in.nextLine(); //For workaroud to prevent input skipping
+            System.out.println("Insert the minutes of the hour: ");
+            m = in.nextInt();
+            in.nextLine(); //For workaroud to prevent input skipping
+
+            //Execute insert query
+            Statement st = conn1.createStatement();
+            String hs = h + ":" + m;
+            String hf = (h + 1) + ":" + m;
+            st.execute("insert into ripetizione (docente, utente, ora_inizio, ora_fine, corso) " +
+                    "values ('" + teacher + "', '" + userr + "', '" + hs + "', '" + hf + "', '" + course + "')");
+            System.out.println("Lesson added!");
+
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            if (conn1 != null) {
+                try {
+                    conn1.close();
+                } catch (SQLException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            }
+        }
+
+    }
+
+    public static void deleteLesson(){
+        Connection conn1 = null;
+        int teacher, userr;
+        int h, m;
+        Scanner in = new Scanner(System.in);
+
+        try {
+            conn1 = DriverManager.getConnection(url1, user, password);
+
+            //Data input
+            System.out.println("Insert the ID number of the teacher: ");
+            teacher = in.nextInt();
+            in.nextLine(); //For workaroud to prevent input skipping
+            System.out.println("Insert the ID number of the user: ");
+            userr = in.nextInt();
+            in.nextLine(); //For workaroud to prevent input skipping
+            System.out.println("Insert the hour in which the lesson starts: ");
+            h = in.nextInt();
+            in.nextLine(); //For workaroud to prevent input skipping
+            System.out.println("Insert the minutes of the hour: ");
+            m = in.nextInt();
+            in.nextLine(); //For workaroud to prevent input skipping
+
+            //Execute insert query
+            Statement st = conn1.createStatement();
+            String hs = h + ":" + m;
+            st.execute("delete from ripetizione where docente =  '" + teacher +
+                    "' and utente = '" + userr + "' and ora_inizio = '" + hs + "'");
+            System.out.println("The booked lesson of the user with id=" + userr + " with" +
+                    " the teacher \nwith id=" + teacher + " at " + hs + ", is deleted.");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        finally {
+            if (conn1 != null) {
+                try {
+                    conn1.close();
+                } catch (SQLException e2) {
+                    System.out.println(e2.getMessage());
+                }
+            }
+        }
+
     }
 }

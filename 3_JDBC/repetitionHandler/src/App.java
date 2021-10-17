@@ -17,14 +17,16 @@ public class App {
             System.out.println("5 = Insert a new affilation between a course and a teacher");
             System.out.println("6 = Remove an existent affilation between a course and a teacher");
             System.out.println("7 = View, for each course, the available repetition lists");
+            System.out.println("8 = Insert a new booked lesson");
+            System.out.println("9 = Delete an existent booked lesson");
             System.out.println("0 = exit");
             System.out.print("> ");
             option = input.nextInt();
 
-            if (option < 0 || option > 7) {
+            if (option < 0 || option > 9) {
                 System.out.println("Invalid choice or typo, please try again.\n");
             }
-        }while (option < 0 || option > 7);
+        }while (option < 0 || option > 9);
 
         return option;
     }
@@ -56,6 +58,25 @@ public class App {
         System.out.println();
     }
 
+    public static void printUsers(){
+        ArrayList<User> users = DAO.retrieveUsers();
+        System.out.println("Current users available: ");
+        for (User u: users) {
+            System.out.println(u);
+        }
+        System.out.println();
+    }
+
+    public static void printLessons(){
+        ArrayList<Lesson> courses = DAO.retrieveLessons();
+        System.out.println("Current lessons booked: ");
+        for (Lesson l: courses) {
+            System.out.println(l);
+        }
+        System.out.println();
+    }
+
+
     public static void main(String[] args) {
 
         int choice = 0;
@@ -68,6 +89,8 @@ public class App {
         printCourses();
         printTeachers();
         printAffiliations();
+        printUsers();
+        printLessons();
         System.out.println();
 
         //Managing data eheh
@@ -76,33 +99,27 @@ public class App {
             System.out.println();
             switch (choice){
                 case 1:
-                    Course c = DAO.insertCourse();
-                    System.out.println("New course (" + c.getTitle() + ") added!");
+                    DAO.insertCourse();
                     break;
 
                 case 2:
-                    System.out.println("Course " + DAO.deleteCourse() + " deleted.");
+                    DAO.deleteCourse();
                     break;
 
                 case 3:
-                    Teacher t = DAO.insertTeacher();
-                    System.out.println("Teacher " + t.getName() + " " + t.getSurname() + " added!");
+                    DAO.insertTeacher();
                     break;
 
                 case 4:
-                    System.out.println("Teacher " + DAO.deleteTeacher() + " deleted.");
+                    DAO.deleteTeacher();
                     break;
 
                 case 5:
-                    Affilation a = DAO.insertAffilation();
-                    System.out.println("Affiliation of the teacher " + a.getTeacher_id() +
-                            " to the course " + a.getCourse_title() + " added!");
+                    DAO.insertAffilation();
                     break;
 
                 case 6:
-                    Affilation a_del = DAO.deleteAffilation();
-                    System.out.println("Affiliation of the teacher " + a_del.getTeacher_id() +
-                            " to the course " + a_del.getCourse_title() + " deleted.");
+                    DAO.deleteAffilation();
                     break;
 
                 case 7:
@@ -117,6 +134,14 @@ public class App {
                         }
                         System.out.println();
                     }
+                    break;
+
+                case 8:
+                    DAO.insertLesson();
+                    break;
+
+                case 9:
+                    DAO.deleteLesson();
                     break;
 
                 default:
