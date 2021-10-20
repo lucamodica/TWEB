@@ -1,4 +1,4 @@
-package DAO;
+package com.example.model;
 
 import java.util.Date;
 
@@ -42,6 +42,22 @@ public class Lesson {
         this.course = course;
     }
 
+    public String getH_start() {
+        return h_start.toString();
+    }
+
+    public void setH_start(Time h_start) {
+        this.h_start = h_start;
+    }
+
+    public String getH_end() {
+        return h_end.toString();
+    }
+
+    public void setH_end(Time h_end) {
+        this.h_end = h_end;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -54,7 +70,7 @@ public class Lesson {
     }
 
 
-    private class Time{
+     class Time{
         private int hours;
         private int minutes;
 

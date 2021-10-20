@@ -1,10 +1,13 @@
 package com.example.demo;
 
 import com.example.DAO.DAO;
-import com.example.DAO.Teacher;
+import com.example.model.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
@@ -26,6 +29,21 @@ public class HelloServlet extends HttpServlet {
         out.println("</ul>");
     }
 
+    public static void printAllPAssibleRepetitions(PrintWriter out){
+        HashMap<String, HashSet<Teacher>> grid = DAO.retrievePossibleRepetitions();
+
+
+        for (Map.Entry<String, HashSet<Teacher>> set : grid.entrySet()) {
+
+            out.print("<p>Teacher for " + set.getKey() + ": ");
+            for (Teacher teacher: set.getValue()) {
+                out.print("| " + teacher.getName() + " " +
+                        teacher.getSurname() + " | ");
+            }
+            out.println("<p>");
+        }
+    }
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
 
@@ -36,7 +54,7 @@ public class HelloServlet extends HttpServlet {
         out.println("<html><body>");
         out.println("<head><link href=\"style.css\" rel=\"stylesheet\"></head>");
         out.println("<h1>" + message + "</h1>");
-        printTeachers(out);
+        printAllPAssibleRepetitions(out);
         out.println("</body></html>");
     }
 
