@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library handling</title>
+    <script src="libraryHandling.js"></script>
+</head>
+<body>
+
+    <ul>
+    <script>
+        function genBook() {
+            let a1 = new Author("Ciro", "Cattuto");
+            let a2 = new Author("Luca", "Roversi");
+            let b1 = new Book("Kamasutra", [a1, a2], 2021, "Pearson");
+            let b2 = new Book("Ready Player One", [a1, a2], 2021, "Pearson");
+            let b3 = new Book("Bushido", [a1, a2], 2021, "Pearson");
+
+            return [b1, b2, b3];
+        }
+
+        function printBook() {
+            let bookList = genBook();
+            bookList.forEach(b => document.writeln("<li> THE book: " + b + "</li>"));
+        }
+
+        printBook();
+    </script>
+    </ul>
+
+
+</body>
+</html>

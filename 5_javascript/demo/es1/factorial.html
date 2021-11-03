@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Factorial</title>
+</head>
+<body>
+
+    <h1>Factorial computeing</h1>
+
+    <p>
+    <script>
+        document.write("<p>Factorial of 5 (iter): " + handle_factorial(iter_factorial, -5) + "</p>");
+        document.write("<p>Fattoriale di 5 (rec): " + handle_factorial(rec_factorial, 'helo') + "</p>");
+
+        function handle_factorial (f, n){
+            let res = -1
+            try{
+                res = f(n);
+            }catch (e){
+                document.writeln(e.name + ': ' + e.message);
+                return "Undefined value";
+            }
+            return res;
+        }
+
+        function iter_factorial(n) {
+            let fact = 1;
+            if (typeof n != 'number'){
+                throw {
+                    name: 'TypeError',
+                    message: 'Type mismatch error'
+                }
+            }
+            if (n < 0){
+                throw {
+                    name: 'IntError',
+                    message: 'Number Negative Error'
+                }
+            }
+            do {
+                fact *= n;
+                n--;
+            }while (n > 1);
+            return fact;
+        }
+
+        function rec_factorial(n) {
+            if (typeof n != 'number'){
+                throw {
+                    name: 'TypeError',
+                    message: 'Type mismatch error'
+                }
+            }
+            if (n < 0){
+                throw {
+                    name: 'IntError',
+                    message: 'Number Negative Error'
+                }
+            }
+            if (n === 1){
+                return n;
+            }
+            return n*rec_factorial(n - 1);
+        }
+    </script>
+    </p>
+
+</body>
+
+</html>
