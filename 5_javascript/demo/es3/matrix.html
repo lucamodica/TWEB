@@ -9,7 +9,19 @@
             let w = document.getElementById("width").value;
             let h = document.getElementById("height").value;
 
-            for (let i = 0)
+            let html = "<table border='3'>"
+            for (let i = 0; i < h; i++){
+                html += "<tr>";
+
+                for (j = 0; j < w; j++){
+                    html += "<td>69</td>";
+                }
+
+                html += "</tr>"
+            }
+
+            let el = document.getElementById("tablee");
+            el.innerHTML = html;
         }
     </script>
 </head>
