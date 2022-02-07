@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="pagella" type="pagellaType" />
+
+    <xs:complexType name="pagellaType">
+        <xs:sequence>
+            <xs:element name="cognome" type="xs:string" />
+            <xs:element name="nome" type="xs:string" />
+            <xs:element name="semestre" type="xs:string" />
+            <xs:element name="valutazioni" type="valutazioneType" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="valutazioneType">
+        <xs:sequence>
+            <xs:element name="materia" type="xs:string"></xs:element>
+            <xs:element name="esito" type="esitoType"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="esitoType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="voto" type="xs:integer"></xs:element>
+                <xs:element name="superato" type="xs:boolean"></xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="votoType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="0" />
+            <xs:maxInclusive value="10" />
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

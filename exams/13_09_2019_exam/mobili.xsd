@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="mobile" type="mobileType" />
+
+    <xs:complexType name="mobileType">
+        <xs:sequence>
+            <xs:element name="larghezza" type="xs:positiveInteger" />
+            <xs:element name="colore" type="coloreType" />
+            <xs:element name="struttura" type="strutturaType" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="coloreType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="bianco" />
+            <xs:enumeration value="nero" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="strutturaType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="cassetti" type="cassettiType" />
+                <xs:element name="ripiani" type="xs:positiveInteger" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="cassettiType">
+        <xs:sequence>
+            <xs:element name="cassetto" type="cassettoType" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="cassettoType">
+        <xs:sequence>
+            <xs:element name="colore" type="coloreType" />
+            <xs:element name="spessore" type="xs:positiveInteger" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

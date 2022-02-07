@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="telefonino" type="telefoninoType"></xs:element>
+
+    <xs:complexType name="telefoninoType">
+        <xs:sequence>
+            <xs:element name="RAM" type="xs:positiveInteger" />
+            <xs:element name="larghezza" type="xs:positiveInteger" />
+            <xs:element name="lunghezza" type="xs:positiveInteger" />
+            <xs:element name="colori" type="coloriType" />
+            <xs:element name="applicazioni" type="applicazioniType" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="coloriType">
+        <xs:sequence>
+            <xs:element name="colore" type="coloreType" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="coloreType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="bianco" />
+            <xs:enumeration value="nero" />
+            <xs:enumeration value="blu" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="applicazioniType">
+        <xs:sequence>
+            <xs:element name="app" type="appType" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="appType">
+        <xs:sequence>
+            <xs:element name="nome" type="xs:string" />
+            <xs:element name="produttore" type="xs:string" />
+            <xs:element name="certificata" type="xs:boolean" />
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

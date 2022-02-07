@@ -29,9 +29,8 @@ public class HelloServlet extends HttpServlet {
         out.println("</ul>");
     }
 
-    public static void printAllPAssibleRepetitions(PrintWriter out){
+    public static void printAllPossibleRepetitions(PrintWriter out){
         HashMap<String, HashSet<Teacher>> grid = DAO.retrievePossibleRepetitions();
-
 
         for (Map.Entry<String, HashSet<Teacher>> set : grid.entrySet()) {
 
@@ -54,7 +53,7 @@ public class HelloServlet extends HttpServlet {
         out.println("<html><body>");
         out.println("<head><link href=\"style.css\" rel=\"stylesheet\"></head>");
         out.println("<h1>" + message + "</h1>");
-        printAllPAssibleRepetitions(out);
+        printAllPossibleRepetitions(out);
         out.println("</body></html>");
     }
 

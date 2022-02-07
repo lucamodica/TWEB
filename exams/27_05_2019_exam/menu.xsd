@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="menu" type="menuType" />
+
+    <xs:complexType name="menuType">
+        <xs:sequence>
+            <xs:element name="primi" type="piattiType" />
+            <xs:element name="secondi" type="piattiType" />
+            <xs:element name="pagamento" type="pagamentoType" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="piattiType">
+        <xs:sequence>
+            <xs:element name="piatto" type="piattoType" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="piattoType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string" />
+            <xs:element name="ingredienti" type="ingredientiType" />
+            <xs:element name="vegan" type="xs:boolean" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ingredientiType">
+        <xs:sequence>
+            <xs:element name="ingrediente" type="xs:string" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="pagamentoType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="contanti" />
+            <xs:enumeration value="POS" />
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>

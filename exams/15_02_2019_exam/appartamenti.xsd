@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="catalogo" type="catalogoType" />
+
+
+    <xs:complexType name="catalogoType">
+        <xs:sequence>
+            <xs:element name="appartamento" type="appartamentoType" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="appartamentoType">
+        <xs:sequence>
+            <xs:element name="numeroCamere" type="numeroCamereType" />
+            <xs:element name="numeroBagni" type="numeroBagniType" />
+            <xs:element name="parcheggio" type="parcheggioType" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="numeroCamereType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1" />
+            <xs:maxInclusive value="10" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="numeroBagniType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1" />
+            <xs:maxInclusive value="4" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="parcheggioType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="box" type="xs:string" />
+                <xs:element name="postoAuto" type="xs:positiveInteger" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

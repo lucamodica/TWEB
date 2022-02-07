@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="appartamento" type="appartamentoType" />
+
+    <xs:complexType name="appartamentoType">
+        <xs:sequence>
+            <xs:element name="mentriQuadri" type="xs:positiveInteger" />
+            <xs:element name="numeroBagni" type="xs:positiveInteger" />
+            <xs:element name="boxAuto" type="xs:boolean" />
+            <xs:element name="stanze" type="stanza" minOccurs="0"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="stanza">
+        <xs:sequence>
+            <xs:element name="lunghezza" type="xs:positiveInteger" />
+            <xs:element name="larghezza" type="xs:positiveInteger" />
+            <xs:element name="finestra" type="xs:boolean" />
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

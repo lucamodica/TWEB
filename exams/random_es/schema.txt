@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="percorso" type="percorsoType" />
+    
+    <xs:complexType name="percorsotype">
+        <xs:sequence>
+            <xs:element name="denominazione" type="xs:string" />
+            <xs:element name="difficolta"  type="difficoltaType"
+            minOccours="0" />
+            <xs:element name="PuntiDiInteresse" type="puntiDiInteresseType">
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="difficoltaType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="T" />
+            <xs:enumeration value="E" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="PuntiDiInteresseType">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="luogo1" type="luogo1Type"
+                maxOccours="unbounded" />
+                <xs:element name="luogo2" type="luogo2Type"
+                maxOccours="unbounded" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="luogo1Type">
+        <xs:sequence>
+            <xs:element name="nome" type="xs:string" />
+            <xs:element name="indirizzo" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="luogo2Type">
+        <xs:sequence>
+            <xs:element name="codificaCoordinate" type="xs:string" />
+            <xs:element name="coordinataX" type="xs:string" />
+            <xs:element name="coordinataY" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

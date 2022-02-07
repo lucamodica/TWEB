@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="laptop" type="laptopType"></xs:element>
+
+    <xs:complexType name="laptopType">
+        <xs:sequence>
+            <xs:element name="modello" type="xs:string"></xs:element>
+            <xs:element name="RAM" type="xs:positiveInteger"></xs:element>
+            <xs:element name="SchedaEthernet" type="xs:boolean"></xs:element>
+            <xs:element name="PorteUSB" type="portaUSB" minOccurs="1" maxOccurs="5"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="portaUSB">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Usb1" />
+            <xs:enumeration value="Usb2" />
+            <xs:enumeration value="Usb3" />
+        </xs:restriction>
+    </xs:simpleType>
+
+</xs:schema>
